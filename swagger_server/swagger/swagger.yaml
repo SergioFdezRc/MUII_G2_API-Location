@@ -1,0 +1,187 @@
+openapi: 3.0.1
+info:
+  title: Location Management API
+  description: Allows the management of the user's location within the home
+  contact:
+    name: G2 - Family Lock
+    url: https://s-computing.blogspot.com/2020/09/familylock.html
+    email: g2_family_lock@gmail.com
+  license:
+    name: CC-BY-NC-CA-4.0
+    url: https://creativecommons.org/licenses/by-nc/4.0/
+  version: "1.0"
+servers:
+- url: http://location.familylock.es
+  description: Production server
+- url: http://beta.location.familylock.es
+  description: Beta server
+paths:
+  /location/user:
+    get:
+      tags:
+      - Location
+      summary: Get user location
+      description: Get user location
+      operationId: get_location
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                title: Info
+                type: string
+                example: '{"location":"Kitchen"}'
+                x-content-type: application/json
+        "403":
+          description: Access denied or forbidden
+          content:
+            text/plain:
+              schema:
+                title: Access denied
+                type: string
+                example: Forbidden
+                x-content-type: text/plain
+        "404":
+          description: Not found response
+          content:
+            text/plain:
+              schema:
+                title: Endpoint not found
+                type: string
+                example: Not found
+                x-content-type: text/plain
+        "405":
+          description: Invalid input
+          content:
+            text/plain:
+              schema:
+                title: Invalid input
+                type: string
+                example: The format is not valid
+                x-content-type: text/plain
+      x-swagger-router-controller: Location
+      x-openapi-router-controller: openapi_server.controllers.location_controller
+  /location:
+    get:
+      tags:
+      - Location
+      summary: Get a historic of locations
+      description: Get a historic of locations
+      operationId: get_historic_location
+      responses:
+        "200":
+          description: OK
+          content:
+            text/plain:
+              schema:
+                title: OK
+                type: string
+                example: '[{"datetime":"12/11/2020 12:30:05","location":"Kitchen"},{"datetime":"12/11/2020
+                  14:23:55","location":"Bedroom"}]'
+                x-content-type: text/plain
+        "404":
+          description: Not found response
+          content:
+            text/plain:
+              schema:
+                title: Endpoint not found
+                type: string
+                example: Not found
+                x-content-type: text/plain
+        "405":
+          description: Invalid input
+          content:
+            text/plain:
+              schema:
+                title: Invalid input
+                type: string
+                example: The format is not valid
+                x-content-type: text/plain
+        "409":
+          description: DB index conflict
+          content:
+            text/plain:
+              schema:
+                title: Index conflict
+                type: string
+                example: There is a conflict
+                x-content-type: text/plain
+      x-swagger-router-controller: Location
+      x-openapi-router-controller: openapi_server.controllers.location_controller
+    post:
+      tags:
+      - Location
+      summary: Add a new user location to the system
+      description: Add a new location of the user
+      operationId: add_location
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Location'
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            text/plain:
+              schema:
+                title: OK
+                type: string
+                example: OK
+                x-content-type: text/plain
+            application/json:
+              schema:
+                title: OK
+                type: string
+                example: OK
+        "201":
+          description: Created
+          content:
+            text/plain:
+              schema:
+                title: Created
+                type: string
+                example: Created
+                x-content-type: text/plain
+        "404":
+          description: Not found response
+          content:
+            text/plain:
+              schema:
+                title: Endpoint not found
+                type: string
+                example: Not found
+                x-content-type: text/plain
+        "405":
+          description: Invalid input
+          content:
+            text/plain:
+              schema:
+                title: Invalid input
+                type: string
+                example: The format is not valid
+                x-content-type: text/plain
+        "409":
+          description: DB index conflict
+          content:
+            text/plain:
+              schema:
+                title: Index conflict
+                type: string
+                example: There is a conflict
+                x-content-type: text/plain
+      x-swagger-router-controller: Location
+      x-openapi-router-controller: openapi_server.controllers.location_controller
+components:
+  schemas:
+    Location:
+      type: object
+      properties:
+        location:
+          type: string
+      example:
+        location: kitchen
+      x-body-name: location
+
