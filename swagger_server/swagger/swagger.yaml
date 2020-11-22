@@ -61,7 +61,7 @@ paths:
                 example: The format is not valid
                 x-content-type: text/plain
       x-swagger-router-controller: Location
-      x-openapi-router-controller: openapi_server.controllers.location_controller
+      x-openapi-router-controller: swagger_server.controllers.location_controller
   /location:
     get:
       tags:
@@ -108,7 +108,7 @@ paths:
                 example: There is a conflict
                 x-content-type: text/plain
       x-swagger-router-controller: Location
-      x-openapi-router-controller: openapi_server.controllers.location_controller
+      x-openapi-router-controller: swagger_server.controllers.location_controller
     post:
       tags:
       - Location
@@ -173,7 +173,7 @@ paths:
                 example: There is a conflict
                 x-content-type: text/plain
       x-swagger-router-controller: Location
-      x-openapi-router-controller: openapi_server.controllers.location_controller
+      x-openapi-router-controller: swagger_server.controllers.location_controller
 components:
   schemas:
     Location:
