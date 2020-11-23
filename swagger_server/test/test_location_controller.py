@@ -12,25 +12,22 @@ from swagger_server.test import BaseTestCase
 class TestLocationController(BaseTestCase):
     """LocationController integration test stubs"""
 
-    # def test_add_location(self):
-    #     """Test case for add_location
-    #
-    #     Add a new user location to the system
-    #     """
-    #     body = Location("kitchen")
-    #     response = self.client.post(
-    #         '/location',
-    #         json=body)
-    #
-    #     response = self.client.open(
-    #         '/location',
-    #         json=body,
-    #         method='POST',
-    #         content_type='application/json'
-    #     )
-    #
-    #     self.assert200(response,
-    #                    'Response body is : ' + response.data.decode('utf-8'))
+    def test_add_location(self):
+        """Test case for add_location
+
+        Add a new user location to the system
+        """
+        body = Location()
+        mocked_data = {"location": "kitchen"}
+        response = self.client.open(
+            '/location',
+            data=json.dumps(mocked_data),
+            method='POST',
+            content_type='application/json'
+        )
+
+        self.assert200(response,
+                       'Response body is : ' + response.data.decode('utf-8'))
 
     def test_get_historic_location(self):
         """Test case for get_historic_location
