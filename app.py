@@ -13,8 +13,9 @@ def create_app():
     app.add_api('swagger.yaml', arguments={'title': 'Location Management API'}, pythonic_params=True)
     return app
 
+
 port = int(os.environ.get('PORT', 2456))
-server = create_app().run(port=port)
+server = create_app().run(host='0.0.0.0', port=port)
 
 if __name__ == '__main__':
-    create_app().run(port=port)
+    create_app().run(host='0.0.0.0', port=port)
