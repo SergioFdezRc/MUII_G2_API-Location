@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+import os
 
 import connexion
 from flask import Flask
@@ -12,8 +13,8 @@ def create_app():
     app.add_api('swagger.yaml', arguments={'title': 'Location Management API'}, pythonic_params=True)
     return app
 
-
-app = create_app().run(2456)
+port = int(os.environ.get('PORT', 2456))
+server = create_app().run(port)
 
 if __name__ == '__main__':
-    app = create_app().run(port=2456)
+    create_app().run(port=port)
