@@ -1,1 +1,1 @@
-web: gunicorn swagger_server.__main__:app
+web: gunicorn __main__:app --log-file=-
