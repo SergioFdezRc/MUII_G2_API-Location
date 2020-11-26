@@ -12,5 +12,7 @@ def main():
     app.run(port=8080)
 
 
+app = main()
+
 if __name__ == '__main__':
     main()
