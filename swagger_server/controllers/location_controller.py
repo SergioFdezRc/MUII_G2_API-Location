@@ -21,8 +21,8 @@ def add_location(location):  # noqa: E501
         location = Location.from_dict(connexion.request.get_json())  # noqa: E501
         print(location)
         db = PostgresDB()
-        db.insert_new_location(location)
-    return 'New location added'
+        db.insert_new_location(location.location)
+    return 'Human detected at %s' % location.location
 
 
 def get_historic_location():  # noqa: E501
@@ -52,8 +52,8 @@ def get_location():  # noqa: E501
     db = PostgresDB()
     user_location = db.get_last_location()
     if len(user_location) > 0:
-        loc = user_location[1]
+        loc = user_location[0]
         if loc is None:
             return '', 204
-        return jsonify({"user_location": user_location[1]}), 200
+        return jsonify({"location": loc[1]})
     return abort(404)
