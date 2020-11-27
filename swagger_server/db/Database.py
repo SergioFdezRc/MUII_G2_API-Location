@@ -3,7 +3,7 @@ import psycopg2
 
 from swagger_server.db.queries import *
 
-DATABASE_URL = os.getenv("DATABASE_URL", "ec2-54-217-224-85.eu-west-1.compute.amazonaws.com")
+DATABASE_HOST = os.getenv("DATABASE_HOST", "ec2-54-217-224-85.eu-west-1.compute.amazonaws.com")
 DATABASE_NAME = os.getenv("DATABASE_NAME", "dbumdeiqr7ebbi")
 DATABASE_USER = os.getenv("DATABASE_USER", "cyzchzivqmaqhz")
 DATABASE_PASS = os.getenv("DATABASE_PASS", "aa8492d1044229569475e0095b565843485352d1390011985d185e3d106cdd7e")
@@ -15,7 +15,7 @@ class PostgresDB:
         self.conn = None
 
     def connect(self):
-        self.conn = psycopg2.connect(host=DATABASE_URL, dbname=DATABASE_NAME, user=DATABASE_USER,
+        self.conn = psycopg2.connect(host=DATABASE_HOST, dbname=DATABASE_NAME, user=DATABASE_USER,
                                      password=DATABASE_PASS,
                                      port=5432)
 
