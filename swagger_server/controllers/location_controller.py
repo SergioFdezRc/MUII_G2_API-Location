@@ -19,7 +19,6 @@ def add_location(location):  # noqa: E501
     """
     if connexion.request.is_json:
         location = Location.from_dict(connexion.request.get_json())  # noqa: E501
-        print(location)
         db = PostgresDB()
         db.insert_new_location(location.location)
     return 'Human detected at %s' % location.location
