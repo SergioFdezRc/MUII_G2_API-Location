@@ -1,6 +1,8 @@
 import connexion
 import six
+from flask import jsonify, abort
 
+from swagger_server.db.Database import PostgresDB
 from swagger_server.models.location import Location  # noqa: E501
 from swagger_server import util
 
@@ -17,6 +19,9 @@ def add_location(location):  # noqa: E501
     """
     if connexion.request.is_json:
         location = Location.from_dict(connexion.request.get_json())  # noqa: E501
+        print(location)
+        db = PostgresDB()
+        db.insert_new_location(location)
     return 'New location added'
 
 
@@ -28,7 +33,12 @@ def get_historic_location():  # noqa: E501
 
     :rtype: str
     """
-    return 'locations!'
+    db = PostgresDB()
+    historial = db.get_locations()
+    if len(historial) > 0:
+        return jsonify({"historial": historial}), 200
+    else:
+        return '', 204
 
 
 def get_location():  # noqa: E501
@@ -39,4 +49,11 @@ def get_location():  # noqa: E501
 
     :rtype: str
     """
-    return 'user location!'
+    db = PostgresDB()
+    user_location = db.get_last_location()
+    if len(user_location) > 0:
+        loc = user_location[1]
+        if loc is None:
+            return '', 204
+        return jsonify({"user_location": user_location[1]}), 200
+    return abort(404)

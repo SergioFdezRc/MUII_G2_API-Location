@@ -11,4 +11,4 @@ app.add_api('swagger.yaml', arguments={'title': 'Location Management API'}, pyth
 
 if __name__ == '__main__':
     port = int(os.environ.get('PORT', 5000))
-    app.run(threaded=True, port=5000)
+    app.run(threaded=True, port=port)
