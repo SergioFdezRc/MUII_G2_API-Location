@@ -21,6 +21,7 @@ class TestLocationController(BaseTestCase):
         """
         body = Location("kitchen")
         mocked_insert_new_location.assert_not_called()
+        mocked_insert_new_location.return_value = None
         response = self.client.open(
             '/location',
             data=json.dumps(body),
