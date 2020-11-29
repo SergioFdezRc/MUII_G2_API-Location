@@ -1,6 +1,6 @@
 import connexion
-from database.Database import PostgresDB
 from flask import jsonify, abort
+from muii_g2_family_lock_database.Database import PostgresDB
 
 from swagger_server.models.location import Location  # noqa: E501
 

@@ -13,7 +13,7 @@ from swagger_server.test import BaseTestCase
 class TestLocationController(BaseTestCase):
     """LocationController integration test stubs"""
 
-    @mock.patch("database.Database.PostgresDB.insert_new_location")
+    @mock.patch("muii_g2_family_lock_database.Database.PostgresDB.insert_new_location")
     def test_add_location(self, mocked_insert_new_location):
         """Test case for add_location
 
@@ -31,7 +31,7 @@ class TestLocationController(BaseTestCase):
         self.assert200(response,
                        'Response body is : ' + response.data.decode('utf-8'))
 
-    @mock.patch("database.Database.PostgresDB.get_locations")
+    @mock.patch("muii_g2_family_lock_database.Database.PostgresDB.get_locations")
     def test_get_historic_location(self, mocked_get_locations):
         """Test case for get_historic_location
 
@@ -52,7 +52,7 @@ class TestLocationController(BaseTestCase):
         self.assert200(response,
                        'Response body is : ' + response.data.decode('utf-8'))
 
-    @mock.patch("database.Database.PostgresDB.get_last_location")
+    @mock.patch("muii_g2_family_lock_database.Database.PostgresDB.get_last_location")
     def test_get_location(self, mocked_get_last_location):
         """Test case for get_location
 
