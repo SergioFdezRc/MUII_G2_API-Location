@@ -1,10 +1,8 @@
 import connexion
-import six
+from database.Database import PostgresDB
 from flask import jsonify, abort
 
-from swagger_server.db.Database import PostgresDB
 from swagger_server.models.location import Location  # noqa: E501
-from swagger_server import util
 
 
 def add_location(location):  # noqa: E501
