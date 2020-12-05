@@ -20,8 +20,8 @@ def add_location(location):  # noqa: E501
     db = PostgresDB()
     error = db.insert_new_location(location.location)
     if error:
-        return error
-    return 'Human detected at %s' % location.location
+        return jsonify(msg=error)
+    return jsonify(msg='Human detected at %s' % location.location)
 
 
 def get_historic_location():  # noqa: E501
@@ -35,7 +35,7 @@ def get_historic_location():  # noqa: E501
     db = PostgresDB()
     historial = db.get_locations()
     if "Error" in historial:
-        return historial
+        return jsonify(msg=historial)
     if len(historial) > 0:
         return jsonify({"historial": historial}), 200
     else:
@@ -53,7 +53,7 @@ def get_location():  # noqa: E501
     db = PostgresDB()
     user_location = db.get_last_location()
     if "Error" in user_location:
-        return user_location
+        return jsonify(msg=user_location)
     if len(user_location) > 0:
         loc = user_location[0]
         if loc is None:
