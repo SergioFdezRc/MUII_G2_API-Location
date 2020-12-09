@@ -37,7 +37,15 @@ def get_historic_location():  # noqa: E501
     if "Error" in historial:
         return jsonify(msg=historial)
     if len(historial) > 0:
-        return jsonify({"historial": historial}), 200
+        data = {"historial" : []}
+        for row in historial:
+            data['historial'].append(
+                {
+                    "id": row[0],
+                    "name": row[1]
+                }
+            )
+        return jsonify(data), 200
     else:
         return '', 204
 
