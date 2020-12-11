@@ -14,7 +14,7 @@ servers:
   - url: https://muii-g2-api-location.herokuapp.com/
     description: "Production server (uses live data)"
   - url: http://beta.muii-g2-api-location.herokuapp.com/
-  description: "Testing server (uses test data)" 
+    description: "Testing server (uses test data)"
 paths:
   /location/user:
     get:
